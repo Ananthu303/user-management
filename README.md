@@ -8,7 +8,7 @@ This project demonstrates **JWT authentication**, **profile management**, and **
 
 ### 🔐 Authentication
 - User Registration (username, email, password)
-- Login & Logout using
+- Login & Logout
 - Only authenticated users can access profile and CRUD features
 
 ### 👤 Profile Management
@@ -65,7 +65,7 @@ A simple **JavaScript + jQuery** frontend is included to:
 
 ## 🚀 Getting Started
 
-Follow the steps below to set up and run the library System on your local machine.
+Follow the steps below to set up and run the User Management System on your local machine.
 
 ---
 
