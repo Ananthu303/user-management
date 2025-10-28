@@ -178,4 +178,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-BASE_URL = env("BASE_URL", default="http://127.0.0.1:8000")
+BASE_URL = env("BASE_URL", default="https://ananthu66.pythonanywhere.com")
