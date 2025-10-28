@@ -18,7 +18,7 @@ from .services import AuthUtil
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = CustomUser.objects.all().order_by("id")
+    queryset = CustomUser.objects.filter(user_type=CustomUser.UserType.USER).order_by("id")
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
 

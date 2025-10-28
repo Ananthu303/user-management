@@ -9,7 +9,8 @@ router.register(r"users", UserViewSet, basename="user")
 
 urlpatterns = [
     path("", include(router.urls)),
-    # Templates URLS
+    # Template URLS
     path("login/", LoginPageView.as_view(), name="login_page"),
     path("profile/", ProfilePageView.as_view(), name="profile_page"),
+    path("notes/", NotesPageView.as_view(), name="notes_page"),
 ]

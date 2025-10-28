@@ -143,6 +143,7 @@ logs/
 
 # Staticfiles
 staticfiles/
+attachments/
 firebase.json
 fb.json
 

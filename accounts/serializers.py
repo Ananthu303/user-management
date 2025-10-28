@@ -75,7 +75,6 @@ class LogoutSerializer(serializers.Serializer):
 
     def validate(self, data):
         self.token = data.get("refresh")
-        print(self.token,'=========token')
         if not self.token:
             raise serializers.ValidationError({"refresh": "Refresh token is required."})
         return data

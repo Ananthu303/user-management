@@ -11,3 +11,7 @@ class LoginPageView(TemplateView):
 
 class ProfilePageView(TemplateView):
     template_name = "account_templates/profile.html"
+
+
+class NotesPageView(TemplateView):
+    template_name = "account_templates/notes.html"
