@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            background: #f8f9fc;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 80px;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-edit {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+        }
+
+        .btn-edit:hover {
+            background-color: #375a7f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card p-4">
+            <h3 class="text-center mb-4">My Profile</h3>
+
+            <div id="profileDisplay">
+                <p><strong>Username:</strong> <span id="displayUsername"></span></p>
+                <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Full Name:</strong> <span id="displayFullName"></span></p>
+                <p><strong>Date of Birth:</strong> <span id="displayDOB"></span></p>
+                <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+                <p><strong>Gender:</strong> <span id="displayGender"></span></p>
+                <p><strong>Phone Number:</strong> <span id="displayPhone"></span></p>
+
+                <button id="editBtn" class="btn btn-edit w-100 mb-2">Edit Profile</button>
+                <button id="changePasswordBtn" class="btn btn-warning w-100 mb-2">Change Password</button>
+                <button id="logoutBtn" class="btn btn-danger w-100">Logout</button>
+            </div>
+
+            <form id="updateProfileForm" class="d-none">
+                <div class="mb-3">
+                    <input type="text" id="updateUsername" class="form-control" placeholder="Username">
+                </div>
+                <div class="mb-3">
+                    <input type="email" id="updateEmail" class="form-control" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="updateFullName" class="form-control" placeholder="Full Name">
+                </div>
+                <div class="mb-3">
+                    <input type="date" id="updateDOB" class="form-control" placeholder="Date of Birth">
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="updateAddress" class="form-control" placeholder="Address">
+                </div>
+                <div class="mb-3">
+                    <select id="updateGender" class="form-control">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="updatePhone" class="form-control" placeholder="Phone Number">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-2">Save Changes</button>
+                <button id="cancelEdit" type="button" class="btn btn-secondary w-100">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <input type="password" id="current_password" class="form-control"
+                                placeholder="Current Password" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" id="new_password_1" class="form-control" placeholder="New Password"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" id="new_password_2" class="form-control"
+                                placeholder="Confirm New Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Update Password</button>
+                        <p id="passwordMessage" class="text-center mt-2"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = "{{ BASE_URL }}";
+
+        $(document).ready(function () {
+            const accessToken = localStorage.getItem("access");
+            const refreshToken = localStorage.getItem("refresh");
+
+            if (!accessToken) {
+                alert("Please login first.");
+                window.location.href = "/api/accounts/login/";
+                return;
+            }
+
+            // Fetch profile data
+            $.ajax({
+                url: `${BASE_URL}/api/accounts/users/me/`,
+                type: "GET",
+                headers: { Authorization: `Bearer ${accessToken}` },
+                success: function (data) {
+                    $("#displayUsername").text(data.username);
+                    $("#displayEmail").text(data.email);
+                    $("#displayFullName").text(data.full_name || "");
+                    $("#displayDOB").text(data.date_of_birth || "");
+                    $("#displayAddress").text(data.address || "");
+                    $("#displayGender").text(data.gender || "");
+                    $("#displayPhone").text(data.phone_number || "");
+
+                    $("#updateUsername").val(data.username);
+                    $("#updateEmail").val(data.email);
+                    $("#updateFullName").val(data.full_name);
+                    $("#updateDOB").val(data.date_of_birth);
+                    $("#updateAddress").val(data.address);
+                    $("#updateGender").val(data.gender);
+                    $("#updatePhone").val(data.phone_number);
+                },
+                error: function () {
+                    alert("Failed to fetch profile. Please login again.");
+                    localStorage.clear();
+                    window.location.href = "/api/accounts/login/";
+                },
+            });
+
+            // Edit profile
+            $("#editBtn").click(function () {
+                $("#profileDisplay").addClass("d-none");
+                $("#updateProfileForm").removeClass("d-none");
+            });
+
+            $("#cancelEdit").click(function () {
+                $("#updateProfileForm").addClass("d-none");
+                $("#profileDisplay").removeClass("d-none");
+            });
+
+            // Update profile
+            $("#updateProfileForm").submit(function (e) {
+                e.preventDefault();
+                const updatedData = {
+                    username: $("#updateUsername").val(),
+                    email: $("#updateEmail").val(),
+                    full_name: $("#updateFullName").val(),
+                    date_of_birth: $("#updateDOB").val(),
+                    address: $("#updateAddress").val(),
+                    gender: $("#updateGender").val(),
+                    phone_number: $("#updatePhone").val(),
+                };
+
+                $.ajax({
+                    url: `${BASE_URL}/api/accounts/users/me/`,
+                    type: "PATCH",
+                    contentType: "application/json",
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                    data: JSON.stringify(updatedData),
+                    success: function () {
+                        alert("Profile updated successfully!");
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        alert("Update failed: " + JSON.stringify(xhr.responseJSON));
+                    },
+                });
+            });
+
+            // change password 
+            $("#changePasswordBtn").click(function () {
+
+                $("#passwordMessage").text("").css("color", "");
+                $("#changePasswordForm")[0].reset();
+
+                $("#changePasswordModal").modal("show");
+            });
+
+            // change password form
+            $("#changePasswordForm").on("submit", function (e) {
+                e.preventDefault();
+                $("#passwordMessage").text("");
+
+                const passwordData = {
+                    current_password: $("#current_password").val(),
+                    new_password_1: $("#new_password_1").val(),
+                    new_password_2: $("#new_password_2").val(),
+                };
+
+                $.ajax({
+                    url: `${BASE_URL}/api/accounts/users/change_password/`,
+                    type: "PUT",
+                    contentType: "application/json",
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                    data: JSON.stringify(passwordData),
+                    success: function (response) {
+                        $("#passwordMessage").text(response.message).css("color", "green");
+                        $("#changePasswordForm")[0].reset();
+                        setTimeout(() => $("#changePasswordModal").modal("hide"), 1500);
+                    },
+                    error: function (xhr) {
+                        const msg = xhr.responseJSON ? Object.values(xhr.responseJSON).join(", ") : "Error changing password.";
+                        $("#passwordMessage").text(msg).css("color", "red");
+                    },
+                });
+            });
+
+
+            // Logout
+            $("#logoutBtn").click(function () {
+                if (!refreshToken) {
+                    alert("No refresh token found. Please login again.");
+                    localStorage.clear();
+                    window.location.href = "/api/accounts/login/";
+                    return;
+                }
+
+                $.ajax({
+                    url: `${BASE_URL}/api/accounts/users/logout/`,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ refresh: refreshToken }),
+                    success: function () {
+                        alert("Logged out successfully!");
+                        localStorage.clear();
+                        window.location.href = "/api/accounts/login/";
+                    },
+                    error: function (xhr) {
+                        alert("Logout failed: " + JSON.stringify(xhr.responseJSON));
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
