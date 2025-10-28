@@ -200,22 +200,33 @@
             }
 
             data.forEach(note => {
-              const createdDate = new Date(note.created_at).toLocaleString();
+              const createdDate = new Date(note.created_at);
+              const modDate = new Date(note.modified_at);
+
+              const createdText = createdDate.toLocaleString();
+              const modifiedText = modDate.toLocaleString();
+
+              // show "Updated at" only if different from created_at
+              const updatedInfo =
+                createdDate.getTime() !== modDate.getTime()
+                  ? `<p class="note-meta mt-2">Updated: ${modifiedText}</p>`
+                  : "";
 
               $("#notesList").append(`
-                <div class="col-md-4">
-                  <div class="card p-4 h-100">
-                    <h5>${note.title}</h5>
-                    <p>${note.description}</p>
-                    ${note.attachment ? `<a href="${note.attachment}" target="_blank" class="attachment-link">📎 View Attachment</a>` : ""}
-                    <p class="note-meta mt-2">Created: ${createdDate}</p>
-                    <div class="mt-3 d-flex justify-content-between">
-                      <button class="btn btn-sm btn-outline-primary editBtn" data-id="${note.id}">Edit</button>
-                      <button class="btn btn-sm btn-outline-danger deleteBtn" data-id="${note.id}">Delete</button>
-                    </div>
-                  </div>
-                </div>
-              `);
+          <div class="col-md-4">
+            <div class="card p-4 h-100">
+              <h5>${note.title}</h5>
+              <p>${note.description}</p>
+              ${note.attachment ? `<a href="${note.attachment}" target="_blank" class="attachment-link">📎 View Attachment</a>` : ""}
+              <p class="note-meta mt-2">Created: ${createdText}</p>
+              ${updatedInfo}
+              <div class="mt-3 d-flex justify-content-between">
+                <button class="btn btn-sm btn-outline-primary editBtn" data-id="${note.id}">Edit</button>
+                <button class="btn btn-sm btn-outline-danger deleteBtn" data-id="${note.id}">Delete</button>
+              </div>
+            </div>
+          </div>
+        `);
             });
           },
           error: function () {
