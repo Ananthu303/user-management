@@ -1,0 +1,772 @@
+{
+	"info": {
+		"_postman_id": "5b1e5f6b-5ecd-4173-b220-c492fb01f0bc",
+		"name": "User Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26237581"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test1@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "tester1",
+							"type": "text"
+						},
+						{
+							"key": "password_1",
+							"value": "An@nthu@66699",
+							"type": "text"
+						},
+						{
+							"key": "password_2",
+							"value": "An@nthu@66699",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/accounts/users/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"accounts",
+						"users",
+						"register",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Reg.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ananthu@example.com\",\r\n  \"username\": \"ananthu\",\r\n  \"full_name\": \"Ananthu P\",\r\n  \"date_of_birth\": \"1998-09-21\",\r\n  \"address\": \"Chengannur\",\r\n  \"gender\": \"Male\",\r\n  \"phone_number\": \"+919876543210\",\r\n  \"password_1\": \"Strong@2025\",\r\n  \"password_2\": \"Strong@2025\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/users/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 13:18:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "182"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"email\": \"ananthu@example.com\",\n    \"username\": \"ananthu\",\n    \"full_name\": \"Ananthu P\",\n    \"date_of_birth\": \"1998-09-21\",\n    \"address\": \"Chengannur\",\n    \"gender\": \"Male\",\n    \"phone_number\": \"+919876543210\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxNzY0MzY4LCJpYXQiOjE3NjE2Nzc5NjgsImp0aSI6IjRlYjQ4ZGM5ZWI0YTQzM2JiOTczOGI3ODU5NGM4OGUyIiwidXNlcl9pZCI6IjIifQ.QXXQZ4ksQzWSqZVrpeA6UqVazRN86b4T_HgJQvznReI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "address",
+							"value": "Alappuzha",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/accounts/users/me/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"accounts",
+						"users",
+						"me",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/users/me/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"users",
+								"me",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 15:09:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "182"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"email\": \"ananthu@example.com\",\n    \"username\": \"ananthu\",\n    \"full_name\": \"Ananthu P\",\n    \"date_of_birth\": \"1998-09-21\",\n    \"address\": \"Chengannur\",\n    \"gender\": \"Male\",\n    \"phone_number\": \"+919876543210\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/accounts/users/?page=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"accounts",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/users/?page=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 17:59:46 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "798"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"count\": 5,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin1@gmail.com\",\n            \"username\": \"admin\",\n            \"full_name\": \"\",\n            \"date_of_birth\": null,\n            \"address\": \"\",\n            \"gender\": \"\",\n            \"phone_number\": null\n        },\n        {\n            \"id\": 2,\n            \"email\": \"ananthup303@gmail.com\",\n            \"username\": \"Ananthu\",\n            \"full_name\": \"Ananthu P\",\n            \"date_of_birth\": \"1998-09-21\",\n            \"address\": \"Alappuzha\",\n            \"gender\": \"Male\",\n            \"phone_number\": \"+919876543210\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"ananthu.p@zartek.in\",\n            \"username\": \"Agent Account 1\",\n            \"full_name\": \"\",\n            \"date_of_birth\": null,\n            \"address\": \"\",\n            \"gender\": \"\",\n            \"phone_number\": null\n        },\n        {\n            \"id\": 4,\n            \"email\": \"akhil.p@zartek.in\",\n            \"username\": \"Manu uncle\",\n            \"full_name\": \"\",\n            \"date_of_birth\": null,\n            \"address\": \"\",\n            \"gender\": \"\",\n            \"phone_number\": null\n        },\n        {\n            \"id\": 5,\n            \"email\": \"adhi123@gmail.com\",\n            \"username\": \"Test\",\n            \"full_name\": \"\",\n            \"date_of_birth\": null,\n            \"address\": \"\",\n            \"gender\": \"\",\n            \"phone_number\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxNzY0MzY4LCJpYXQiOjE3NjE2Nzc5NjgsImp0aSI6IjRlYjQ4ZGM5ZWI0YTQzM2JiOTczOGI3ODU5NGM4OGUyIiwidXNlcl9pZCI6IjIifQ.QXXQZ4ksQzWSqZVrpeA6UqVazRN86b4T_HgJQvznReI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Pharmazon",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Pharmazon description",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/notes/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Notes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Pharma",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pharma description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/notes/6/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"notes",
+								"6",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 19:43:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "165"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 6,\n    \"title\": \"Pharma\",\n    \"description\": \"Pharma description\",\n    \"attachment\": null,\n    \"created_at\": \"2025-10-28T19:42:11.752749Z\",\n    \"modified_at\": \"2025-10-28T19:43:48.265648Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "refresh",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MjI4Mjc2OCwiaWF0IjoxNzYxNjc3OTY4LCJqdGkiOiI1NWFmYTU0MGUwZWU0NjMxYjU4MmNmYjZjNzQ0Yjg3NyIsInVzZXJfaWQiOiIyIn0.6pt5z0HcQGOkr0vD_1361B5xmfV2XzoSQTkUh8K7jPo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/accounts/users/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"accounts",
+						"users",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Logout User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MjI4Mjc2OCwiaWF0IjoxNzYxNjc3OTY4LCJqdGkiOiI1NWFmYTU0MGUwZWU0NjMxYjU4MmNmYjZjNzQ0Yjg3NyIsInVzZXJfaWQiOiIyIn0.6pt5z0HcQGOkr0vD_1361B5xmfV2XzoSQTkUh8K7jPo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/users/logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"users",
+								"logout",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 19:45:03 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Logout successful.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "manu1@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "An@nthu@66699",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/accounts/users/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"accounts",
+						"users",
+						"login",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "manu1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "An@nthu@66699",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/users/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 28 Oct 2025 21:47:04 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.12.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "518"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Login successful\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxNzc0NDI0LCJpYXQiOjE3NjE2ODgwMjQsImp0aSI6ImZiOTA5MzI1YjliNjQ5MzlhYzlhYjdkNzA0MjI3MjdiIiwidXNlcl9pZCI6IjkifQ.ojjBS1XQfmFUfWRcrwMGLyDrJRjUEKCr4zqalpSaAl8\",\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MjI5MjgyNCwiaWF0IjoxNzYxNjg4MDI0LCJqdGkiOiI0NjIyZmM3ZWQ3NGY0M2U1OTAxMzMwMzcxODQ2YzlmNyIsInVzZXJfaWQiOiI5In0.kuzkfW3Xo2TE59onsXFkww2gqhxoygLaVIyPoj4smVg\"\n}"
+				}
+			]
+		}
+	]
+}
