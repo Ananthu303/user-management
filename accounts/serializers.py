@@ -54,7 +54,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
-    
+
     def validate(self, data):
         email = data.get("email")
         password = data.get("password")
@@ -78,6 +78,7 @@ class LogoutSerializer(serializers.Serializer):
         if not self.token:
             raise serializers.ValidationError({"refresh": "Refresh token is required."})
         return data
+
 
 class TokenSerializer(serializers.Serializer):
     access = serializers.CharField()
